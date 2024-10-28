@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- import babel compiler -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <title>belajar React</title>
+    <style>
+      .buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .buttons .main {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/jsx">
+      const container = document.getElementById("root");
+      const root = ReactDOM.createRoot(container)
+
+      function Teks({count}){
+        return <span className = "count">{count}</span>
+      }
+      function Button({content, aksi, disabled}){
+        return (
+            <button onClick = {aksi} disabled = {disabled}>
+                {content}
+            </button>)
+      }
+
+      function HomePage(){
+      const [number, setNumber] = React.useState(0);
+
+      function addNumber(){
+        setNumber(number + 1)
+      }
+      function minNumber(){
+        setNumber(number - 1)
+      }
+      function resetNumber(){
+        setNumber(0)
+      }
+
+      return (
+        <div>
+            <div className="buttons">
+                <div className="main">
+                    <Button aksi = {minNumber} content = "-" disabled = {number < 0 || number >= 10}/>
+                    <Teks count = {number < 0 || number > 10 ? "Done!" : number}/>
+                    <Button aksi = {addNumber} content = "+" disabled = {number >= 10 || number < 0}/>
+                </div>
+                <div className="reset">
+                    <Button aksi = {resetNumber} content = "Reset" disabled = {number < 0 || number >= 10 ? false : true}/>
+                </div>
+
+            </div>
+        </div>
+      )
+      }
+
+      root.render(<HomePage/>)
+    </script>
+  </body>
+</html>
