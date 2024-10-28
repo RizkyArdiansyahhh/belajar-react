@@ -19,10 +19,32 @@
       const container = document.getElementById("root");
       const root = ReactDOM.createRoot(container);
 
-      function Header(){
-        return <h1>belajar react bareng pak dika 🚀</h1>
+      function Header({name}){
+        return (<h1>belajar react bareng {name ? name : "budi"} 🚀</h1>)
       }
-      root.render(<Header/>)
+
+      function HomePage(){
+       const students = ["riski", "budi", "ardiansyah"];
+       const [like, setLike] = React.useState(0);
+
+       function handleClick(){
+        setLike(like + 1);
+       }
+
+       return (
+        <div>
+            <Header/>
+            <ul>
+                {students.map((student) => (
+                    <li key = {student}>{student}</li>
+                ))}
+            </ul>
+            <button onClick ={handleClick}>Like ({like})</button>
+        </div>
+       )
+      }
+
+      root.render(<HomePage/>)
     </script>
   </body>
 </html>
